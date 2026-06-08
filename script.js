@@ -11,7 +11,7 @@ const CONFIG = {
   whatsapp: "447460011497",          // 07460 011497 in UK international format
 
   // Your business email (orders sent "via Email" go here).
-  email: "hello@eddiescakerybar.com", // <-- CHANGE THIS
+  email: "Eddiescakerybar@gmail.com",
 
   // OPTIONAL: A Formspree form ID for real email delivery (free, text only).
   // 1) Sign up at https://formspree.io  2) Create a form  3) paste the ID here.
