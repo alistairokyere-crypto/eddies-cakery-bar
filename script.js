@@ -23,7 +23,7 @@ const CONFIG = {
   //   1) Go to https://web3forms.com  2) Enter YOUR email, get an Access Key
   //   3) paste the key below. Orders AND uploaded photos will arrive in your inbox.
   // If set, this is used for "Send via Email" (takes priority over Formspree).
-  web3formsKey: "",                   // e.g. "a1b2c3d4-...."
+  web3formsKey: "358564c2-0852-49b2-856b-139fd26b856e",
 
   instagram: "eddiescakerybar",
 
@@ -319,14 +319,23 @@ orderForm.addEventListener("submit", async (e) => {
       fd.append("subject", `New cake enquiry from ${o.name}`);
       fd.append("from_name", CONFIG.businessName + " website");
       Object.entries(o).forEach(([k, v]) => v && fd.append(k, v));
-      [...files].forEach((f, i) => fd.append(`inspiration_${i + 1}`, f));
+      // Note: file attachments require Web3Forms Pro, so photos are sent via
+      // WhatsApp instead. We flag in the email how many the customer has.
+      if (files.length) {
+        fd.append("inspiration_photos", `${files.length} photo(s) — customer asked to send via WhatsApp`);
+      }
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
-      if (res.ok) {
-        orderNote.textContent = files.length
-          ? "Thank you! Your enquiry and photos have been emailed to us. 🎂"
-          : "Thank you! Your enquiry has been emailed to us. We'll be in touch soon. 🎂";
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
         orderForm.reset();
         $("#uploadText").textContent = "Tap to add photos";
+        if (files.length) {
+          // photos can't email on the free plan -> hand off to WhatsApp
+          orderNote.textContent = "Enquiry sent to our inbox! Opening WhatsApp so you can attach your photos.";
+          window.open(waLink(orderToText(o) + "\n(Sending my inspiration photos here)"), "_blank");
+        } else {
+          orderNote.textContent = "Thank you! Your enquiry has been sent straight to our inbox. We'll be in touch soon. 🎂";
+        }
       } else {
         orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
       }
