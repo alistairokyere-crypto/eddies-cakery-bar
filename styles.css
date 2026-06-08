@@ -625,16 +625,27 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; line-height: 1.1; 
   .footer__inner { grid-template-columns: 1fr; gap: 2rem; }
 }
 @media (max-width: 720px) {
+  /* Remove blur on mobile: backdrop-filter makes the fixed drawer anchor to the
+     nav bar instead of the screen, so its background wouldn't cover full height. */
+  .nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--cream);
+  }
   .nav__links {
-    position: fixed; inset: 0 0 0 auto;
-    width: 75%; max-width: 320px;
+    position: fixed; top: 0; right: 0; bottom: 0; left: auto;
+    width: 78%; max-width: 320px;
+    height: 100vh; height: 100dvh;
     background: var(--cream);
     flex-direction: column;
-    padding: 6rem 2rem;
+    justify-content: center;
+    padding: 5rem 2rem;
     gap: 1.6rem;
+    overflow-y: auto;
     transform: translateX(100%);
     transition: transform 0.4s ease;
     box-shadow: var(--shadow);
+    z-index: 120;
   }
   .nav__links.open { transform: none; }
   .nav__burger { display: flex; }
