@@ -25,6 +25,14 @@ const CONFIG = {
   // If set, this is used for "Send via Email" (takes priority over Formspree).
   web3formsKey: "358564c2-0852-49b2-856b-139fd26b856e",
 
+  // For inspiration PHOTOS to arrive as links inside the email (free).
+  // Web3Forms' free plan can't attach files, so uploaded photos are first sent
+  // to ImgBB and the resulting links are included in your enquiry email.
+  //   1) Sign up free at https://imgbb.com  2) Go to https://api.imgbb.com and
+  //   click "Get API key"  3) paste the 32-character key below.
+  // Leave "" and photos are collected via WhatsApp instead.
+  imgbbKey: "",
+
   instagram: "eddiescakerybar",
 
   businessName: "Eddie's Cakery Bar",
@@ -314,23 +322,46 @@ orderForm.addEventListener("submit", async (e) => {
   if (CONFIG.web3formsKey) {
     orderNote.textContent = "Sending your enquiry…";
     try {
+      // 1) If photos were added and ImgBB is configured, upload them first so we
+      //    can include clickable links in the email (Web3Forms free can't attach).
+      let photoLinks = [];
+      let uploadFailed = false;
+      if (files.length && CONFIG.imgbbKey) {
+        orderNote.textContent = "Uploading your photos…";
+        for (const f of files) {
+          try {
+            const ifd = new FormData();
+            ifd.append("image", f);
+            const ir = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.imgbbKey}`, { method: "POST", body: ifd });
+            const ij = await ir.json();
+            if (ij && ij.success && ij.data && ij.data.url) photoLinks.push(ij.data.url);
+            else uploadFailed = true;
+          } catch { uploadFailed = true; }
+        }
+      }
+
+      // 2) Send the enquiry to your inbox.
+      orderNote.textContent = "Sending your enquiry…";
       const fd = new FormData();
       fd.append("access_key", CONFIG.web3formsKey);
       fd.append("subject", `New cake enquiry from ${o.name}`);
       fd.append("from_name", CONFIG.businessName + " website");
       Object.entries(o).forEach(([k, v]) => v && fd.append(k, v));
-      // Note: file attachments require Web3Forms Pro, so photos are sent via
-      // WhatsApp instead. We flag in the email how many the customer has.
-      if (files.length) {
-        fd.append("inspiration_photos", `${files.length} photo(s) — customer asked to send via WhatsApp`);
+      if (photoLinks.length) {
+        fd.append("inspiration_photos", photoLinks.join("\n"));
+      } else if (files.length) {
+        fd.append("inspiration_photos", `${files.length} photo(s) to follow via WhatsApp`);
       }
       const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: fd });
       const data = await res.json().catch(() => ({}));
+
       if (res.ok && data.success) {
         orderForm.reset();
         $("#uploadText").textContent = "Tap to add photos";
-        if (files.length) {
-          // photos can't email on the free plan -> hand off to WhatsApp
+        if (photoLinks.length) {
+          orderNote.textContent = "Thank you! Your enquiry and photos have been sent to our inbox. We'll be in touch soon. 🎂";
+        } else if (files.length) {
+          // photos couldn't be hosted (no ImgBB key, or upload failed) -> WhatsApp
           orderNote.textContent = "Enquiry sent to our inbox! Opening WhatsApp so you can attach your photos.";
           window.open(waLink(orderToText(o) + "\n(Sending my inspiration photos here)"), "_blank");
         } else {
