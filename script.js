@@ -494,44 +494,57 @@ $$(".reveal").forEach((el) => io.observe(el));
    ============================================================ */
 const KB = [
   {
-    keys: ["price", "cost", "how much", "pricing", "expensive", "budget"],
-    a: "Every cake is quoted individually, since price depends on the size, design and detail you'd like. Pop your idea into the order form (or message us on WhatsApp) and we'll send you a personalised quote! 💷",
+    keys: ["price", "cost", "how much", "pricing", "expensive", "budget", "price list", "price guide", "prices"],
+    a: "Here's our starting price guide. Final prices vary with the design, decorations, toppers, florals and cake shape.<br><br>" +
+       "<strong>Celebration cakes</strong><br>6-inch from £90<br>8-inch from £130<br>10-inch from £190<br><br>" +
+       "<strong>Cupcakes</strong><br>Box of 12 from £30<br><br>" +
+       "<strong>Bento box</strong> (4-inch cake &amp; 5 cupcakes) from £65<br><br>" +
+       "<strong>Tiered cakes</strong><br>Small two-tier (6-inch &amp; 4-inch) from £160<br>Standard two-tier from £200<br><br>" +
+       "For an exact quote, send your serving size, date, theme and any inspiration photos via the order form or WhatsApp.",
   },
   {
-    keys: ["flavour", "flavor", "taste", "sponge", "vanilla", "chocolate", "red velvet"],
-    a: "We do vanilla, chocolate, red velvet, lemon, biscoff and more, plus custom flavours on request. Fillings include buttercream, ganache, jam and cream cheese. 🍰",
+    keys: ["flavour", "flavor", "taste", "sponge", "vanilla", "chocolate", "red velvet", "filling", "biscoff", "oreo"],
+    a: "Our flavours are Classic Vanilla, Oreo, Red Velvet, Chocolate, Biscoff, Salted Caramel and Victorian Sponge. Fillings include Jam, Oreo White Chocolate, Salted Caramel, Biscoff and Bueno. You'll find full descriptions in the Flavours section above.",
   },
   {
-    keys: ["how long", "notice", "lead time", "advance", "last minute", "when", "book", "available"],
-    a: "We recommend ordering at least 1 to 2 weeks ahead, and 4 to 6 weeks for weddings or large orders. We sometimes take short-notice orders too, so ask us on WhatsApp! ⏰",
+    keys: ["wedding", "weddings", "bride", "marriage"],
+    a: "We'd love to make your wedding cake! Please book a minimum of 3 months in advance so we can plan the consultation, design and scheduling.",
+  },
+  {
+    keys: ["last minute", "last-minute", "short notice", "urgent", "rush", "asap", "emergency", "soon"],
+    a: "We sometimes take last-minute orders, subject to availability. A £20 surcharge applies to short-notice orders. Message us on WhatsApp and we'll check your date right away.",
+  },
+  {
+    keys: ["how long", "notice", "lead time", "advance", "when", "book", "available", "how far"],
+    a: "To avoid disappointment, please book at least 1 month ahead for celebration cakes, and 3 months for weddings. Need something sooner? Just ask, short-notice orders are sometimes possible (a £20 surcharge applies).",
   },
   {
     keys: ["deliver", "delivery", "collect", "collection", "pickup", "pick up", "ship"],
-    a: "You can collect from us, or we offer local delivery for a small fee depending on distance. Just choose your preference in the order form. 🚗",
+    a: "You can collect from us, or we offer local delivery for a small fee depending on distance. Just choose your preference in the order form.",
   },
   {
     keys: ["allergy", "allergen", "gluten", "vegan", "dairy", "nut", "egg"],
-    a: "We can cater to many dietary needs including vegan and gluten-friendly options. Please tell us about any allergies in your order so we can advise safely. 🌱",
+    a: "We can cater to many dietary needs including vegan and gluten-friendly options. Please tell us about any allergies in your order so we can advise safely.",
   },
   {
     keys: ["custom", "design", "bespoke", "theme", "picture", "photo", "personalised", "personalized"],
-    a: "Absolutely, custom designs are our favourite! Describe your theme, colours and inspiration in the order form (or send reference photos on WhatsApp) and we'll bring it to life. 🎨",
+    a: "Custom designs are our favourite! Describe your theme, colours and inspiration in the order form (or send reference photos on WhatsApp) and we'll bring it to life. Every cake is uniquely designed for you.",
   },
   {
-    keys: ["pay", "payment", "deposit", "secure"],
-    a: "A deposit secures your date, with the balance due before collection/delivery. We'll share payment details once your order is confirmed. 💳",
+    keys: ["pay", "payment", "deposit", "secure", "booking", "confirm", "reserve"],
+    a: "A 50% non-refundable deposit secures your date. Orders aren't confirmed until the deposit is received, with the balance due before collection or delivery.",
   },
   {
     keys: ["where", "location", "address", "based"],
-    a: "We're a small-batch home cakery taking orders locally. Send us a message and we'll confirm collection details and delivery range for your area. 📍",
+    a: "We're a small-batch home cakery taking orders locally. Send us a message and we'll confirm collection details and our delivery range for your area.",
   },
   {
     keys: ["order", "buy", "want a cake", "place order"],
-    a: "Yay! 🎉 Scroll up to the order form, fill in your details, and send it to us via WhatsApp or email. We'll confirm price and availability fast.",
+    a: "Wonderful! Scroll up to the order form, fill in your details and send it to us via WhatsApp or email. We'll confirm price and availability quickly.",
   },
   {
     keys: ["hour", "open", "opening", "time"],
-    a: "We're around Mon–Fri 9am–6pm, Sat 10am–4pm, and Sundays by order. Messages are answered as quickly as we can! 🕘",
+    a: "We're around Mon to Fri 9am to 6pm, Sat 10am to 4pm, and Sundays by order. We answer messages as quickly as we can!",
   },
 ];
 
