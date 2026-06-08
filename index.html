@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eddie's Cakery Bar | Handcrafted Celebration Cakes</title>
+  <meta name="description" content="Eddie's Cakery Bar. Handcrafted celebration cakes, dessert tables & treats made to order. Order via WhatsApp, read reviews, and book your date." />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Eddie's Cakery Bar | Handcrafted Celebration Cakes" />
+  <meta property="og:description" content="Handcrafted celebration cakes & dessert tables, made to order. Order your cake today." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/logo.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="topbar">
+    <span>✦ Now taking orders for celebration cakes, dessert tables & treats. Book early to secure your date ✦</span>
+  </div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo" aria-label="Eddie's Cakery Bar home">
+        <img src="images/logo.png" alt="Eddie's Cakery Bar" class="nav__logo-img" />
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#menu">The Cakes</a>
+        <a href="#flavours">Flavours</a>
+        <a href="#about">About</a>
+        <a href="#masterclass">Classes</a>
+        <a href="#order">Order</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#instagram">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav__cta">
+        <a href="#order" class="btn btn--small">Order a Cake</a>
+        <button class="nav__burger" id="burger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
+    <div class="hero__media"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Handcrafted in small batches</p>
+      <h1 class="hero__title">Cakes worth<br/>celebrating</h1>
+      <p class="hero__sub">
+        Bespoke celebration cakes, dessert tables and sweet treats,
+        baked to order and finished by hand at Eddie's Cakery Bar.
+      </p>
+      <div class="hero__buttons">
+        <a href="#order" class="btn">Order Your Cake</a>
+        <a href="#menu" class="btn btn--ghost">Browse the Menu</a>
+      </div>
+      <div class="hero__rating">
+        <span class="stars">★★★★★</span>
+        <span>Loved by happy customers across the city</span>
+      </div>
+    </div>
+    <a href="#intro" class="hero__scroll" aria-label="Scroll down">⌄</a>
+  </section>
+
+  <!-- ============ INTRO / ABOUT STRIP ============ -->
+  <section class="intro" id="intro">
+    <div class="intro__inner reveal">
+      <p class="section-eyebrow">Welcome to the bar</p>
+      <h2 class="intro__title">Every cake is made for a moment</h2>
+      <p class="intro__text">
+        At Eddie's Cakery Bar, we believe a cake should taste as beautiful as it
+        looks. From a first birthday to a wedding day, each order is baked fresh,
+        filled generously and decorated by hand, so no two are ever quite the same.
+        Tell us what you're celebrating and we'll make it unforgettable.
+      </p>
+      <div class="intro__stats">
+        <div><strong>100%</strong><span>Made to order</span></div>
+        <div><strong>Hand</strong><span>Finished, always</span></div>
+        <div><strong>5★</strong><span>Customer rated</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED VIDEO (hidden until a video is set in CONFIG.featuredVideo) ============ -->
+  <section class="video-feature" id="videoFeature" hidden>
+    <div class="video-feature__inner reveal">
+      <p class="section-eyebrow">Watch</p>
+      <h2 class="section-title">A little behind the scenes</h2>
+      <div class="video-feature__frame" id="videoFrame">
+        <!-- video injected by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU / GALLERY ============ -->
+  <section class="menu" id="menu">
+    <div class="menu__head reveal">
+      <p class="section-eyebrow">The collection</p>
+      <h2 class="section-title">Our cakes & treats</h2>
+      <p class="section-lead">
+        A taste of what we make. Every design is customisable, so
+        flavours, colours and sizes are all yours to choose.
+      </p>
+    </div>
+
+    <div class="menu__grid" id="menuGrid">
+      <!-- Cards injected by script.js -->
+    </div>
+
+    <div class="menu__note reveal">
+      Don't see exactly what you want? We love a custom commission, so
+      <a href="#order">tell us your idea</a>.
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <div class="how__head reveal">
+      <p class="section-eyebrow">Simple & sweet</p>
+      <h2 class="section-title">How ordering works</h2>
+    </div>
+    <div class="how__grid">
+      <div class="how__step reveal">
+        <span class="how__num">01</span>
+        <h3>Choose your cake</h3>
+        <p>Pick a design from the collection or describe your dream cake: flavour, size, colours and theme.</p>
+      </div>
+      <div class="how__step reveal">
+        <span class="how__num">02</span>
+        <h3>Send your order</h3>
+        <p>Fill in the order form and it lands straight in our WhatsApp or inbox. We'll confirm price & availability.</p>
+      </div>
+      <div class="how__step reveal">
+        <span class="how__num">03</span>
+        <h3>Collect or get it delivered</h3>
+        <p>Pay to secure your date, then collect from us or arrange local delivery. Enjoy every bite.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT US ============ -->
+  <section class="split" id="about">
+    <div class="split__inner">
+      <div class="split__media reveal">
+        <img src="images/maker.jpg" alt="Celebration cakes by Eddie's Cakery Bar" loading="lazy" />
+      </div>
+      <div class="split__text reveal">
+        <p class="section-eyebrow">Our story</p>
+        <h2 class="section-title">Meet the maker</h2>
+        <p>Welcome to Eddie's Cakery Bar, where every cake is made with passion, creativity and a genuine love for celebrating life's special moments.</p>
+        <p>I'm Edwina, founder and CEO. What started as a passion for baking over six years ago has grown into a thriving cake business dedicated to creating beautiful, bespoke cakes and sweet treats for every occasion.</p>
+        <p>From birthdays and weddings to baby showers and corporate events, I believe every celebration deserves a cake as memorable as the moment itself. Each design is carefully crafted with attention to detail, quality ingredients and a personal touch that reflects your vision, looking stunning and tasting incredible too.</p>
+        <p>Over the years I've had the privilege of creating cakes for hundreds of celebrations, and there's nothing more rewarding than being part of such meaningful moments.</p>
+        <p class="split__signature">Made with love, designed with care, created to leave a lasting impression. ❤️<br/>
+        <strong>Edwina Omeleh</strong>, Founder &amp; CEO, Eddie's Cakery Bar</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAKE MASTERCLASSES ============ -->
+  <section class="split split--alt" id="masterclass">
+    <div class="split__inner">
+      <div class="split__text reveal">
+        <p class="section-eyebrow">Learn with us</p>
+        <h2 class="section-title">Cake Masterclasses with ECB</h2>
+        <p>Ready to take your cake decorating skills to the next level? I offer both <strong>1:1 private masterclasses</strong> and <strong>group sessions</strong>, designed for beginners and aspiring cake artists who want to build confidence and learn professional techniques.</p>
+        <p class="split__subhead">What you'll learn</p>
+        <div class="learn-groups">
+          <div class="learn-group">
+            <h4>Frosting techniques</h4>
+            <ul class="split__list">
+              <li>Master buttercream</li>
+              <li>Working with American buttercream</li>
+              <li>Smoothing buttercream finishes</li>
+            </ul>
+          </div>
+          <div class="learn-group">
+            <h4>Cake stacking &amp; structure</h4>
+            <ul class="split__list">
+              <li>Build tall, stable tiered cakes</li>
+              <li>Use dowels and boards correctly</li>
+            </ul>
+          </div>
+          <div class="learn-group">
+            <h4>Piping &amp; decorating</h4>
+            <ul class="split__list">
+              <li>Create borders, flowers and patterns</li>
+              <li>Practise with different piping tips</li>
+            </ul>
+          </div>
+          <div class="learn-group">
+            <h4>Colouring &amp; flavouring</h4>
+            <ul class="split__list">
+              <li>Use gel and natural food colours</li>
+              <li>Flavour cakes and frostings creatively</li>
+            </ul>
+          </div>
+          <div class="learn-group">
+            <h4>Presentation tips</h4>
+            <ul class="split__list">
+              <li>Style your cake for photos and events</li>
+              <li>Add final touches for a professional look</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="split__subhead">How to book</p>
+        <ol class="book-steps">
+          <li>Send us a message on WhatsApp or Instagram</li>
+          <li>Secure your place with a deposit</li>
+        </ol>
+
+        <a href="#" class="btn" id="bookClass">Enquire About a Class</a>
+      </div>
+      <div class="split__media reveal">
+        <img src="images/masterclass.jpg" alt="Beautifully decorated patisserie, Cake Masterclasses with ECB" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FLAVOURS & FILLINGS ============ -->
+  <section class="flavours" id="flavours">
+    <div class="flavours__head reveal">
+      <p class="section-eyebrow">Make it yours</p>
+      <h2 class="section-title">Flavours &amp; fillings</h2>
+      <p class="section-lead">Pair any sponge with a filling to create your perfect cake. Choose your favourites when you order.</p>
+    </div>
+    <div class="flavours__cols">
+      <div class="flavours__col reveal">
+        <h3 class="flavours__col-title">Cake flavours</h3>
+        <div id="flavourList"><!-- injected by script.js --></div>
+      </div>
+      <div class="flavours__col reveal">
+        <h3 class="flavours__col-title">Fillings</h3>
+        <div id="fillingList"><!-- injected by script.js --></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORDER FORM ============ -->
+  <section class="order" id="order">
+    <div class="order__inner">
+      <div class="order__intro reveal">
+        <p class="section-eyebrow">Let's bake</p>
+        <h2 class="section-title">Place your order</h2>
+        <p class="section-lead">
+          Fill this in and choose how you'd like to send it. We typically reply
+          within a few hours. For busy dates, the earlier the better!
+        </p>
+        <ul class="order__perks">
+          <li>✦ Custom flavours & designs</li>
+          <li>✦ Collection or local delivery</li>
+          <li>✦ Allergy-friendly options available</li>
+        </ul>
+      </div>
+
+      <form class="order__form reveal" id="orderForm">
+        <div class="field">
+          <label for="name">Your name *</label>
+          <input type="text" id="name" name="name" required placeholder="e.g. Ama Mensah" />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone / WhatsApp *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="e.g. 07xxx xxxxxx" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="occasion">Occasion *</label>
+            <select id="occasion" name="occasion" required>
+              <option value="">Select…</option>
+              <option>Birthday</option>
+              <option>Wedding</option>
+              <option>Anniversary</option>
+              <option>Baby shower</option>
+              <option>Celebration / Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Date needed *</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="cake">Cake / treat *</label>
+            <select id="cake" name="cake" required>
+              <option value="">Select…</option>
+              <!-- options injected by script.js -->
+              <option>Custom design</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="servings">Size / servings</label>
+            <select id="servings" name="servings">
+              <option value="">Select…</option>
+              <option>6–8 servings (6")</option>
+              <option>10–14 servings (8")</option>
+              <option>20–25 servings (10")</option>
+              <option>Tiered cake</option>
+              <option>Not sure, please advise</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="flavour">Cake flavour</label>
+            <select id="flavour" name="flavour">
+              <option value="">Select…</option>
+              <!-- flavour options injected by script.js -->
+              <option>Not sure, please advise</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filling">Filling</label>
+            <select id="filling" name="filling">
+              <option value="">Select…</option>
+              <!-- filling options injected by script.js -->
+              <option>Not sure, please advise</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="fulfilment">Collection or delivery?</label>
+            <select id="fulfilment" name="fulfilment">
+              <option value="">Select…</option>
+              <option>Collection</option>
+              <option>Local delivery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="details">Your vision / message</label>
+          <textarea id="details" name="details" rows="4" placeholder="Colours, theme, inspiration, name/age to write, allergies…"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inspo">Inspiration photos <span class="field-hint">(optional, share cakes or designs you love)</span></label>
+          <label class="upload" for="inspo">
+            <span class="upload__icon">⬆</span>
+            <span class="upload__text" id="uploadText">Tap to add photos</span>
+            <input type="file" id="inspo" name="inspo" accept="image/*" multiple hidden />
+          </label>
+        </div>
+
+        <div class="order__send">
+          <button type="button" class="btn btn--whatsapp" id="sendWhatsApp">
+            <span class="wa-icon">✆</span> Send via WhatsApp
+          </button>
+          <button type="submit" class="btn btn--ghost" id="sendEmail">
+            Send via Email
+          </button>
+          <a href="#" class="order__ig-link" id="sendInstagram" target="_blank" rel="noopener">
+            or DM us on Instagram →
+          </a>
+        </div>
+        <p class="order__formnote" id="orderNote"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="reviews" id="reviews">
+    <div class="reviews__head reveal">
+      <p class="section-eyebrow">Kind words</p>
+      <h2 class="section-title">What our customers say</h2>
+      <div class="reviews__summary">
+        <span class="stars" id="avgStars">★★★★★</span>
+        <span id="avgText">5.0 · loved by our customers</span>
+      </div>
+      <div class="reviews__google" id="googleBadge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" />
+        <span>Reviews from Google</span>
+      </div>
+    </div>
+
+    <!-- Live Google reviews widget mounts here when configured (see script.js CONFIG.google) -->
+    <div class="reviews__widget" id="googleReviews"></div>
+
+    <!-- Fallback: curated reviews (shown until the Google widget is set up) -->
+    <div class="reviews__grid" id="reviewsGrid">
+      <!-- review cards injected by script.js -->
+    </div>
+
+    <div class="reviews__cta reveal">
+      <a class="btn btn--google" id="leaveGoogleReview" href="#" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="" />
+        Review us on Google
+      </a>
+      <a class="reviews__seeall" id="seeAllGoogle" href="#" target="_blank" rel="noopener">See all reviews on Google →</a>
+    </div>
+  </section>
+
+  <!-- ============ INSTAGRAM FEED ============ -->
+  <section class="insta" id="instagram">
+    <div class="insta__head reveal">
+      <p class="section-eyebrow">@eddiescakerybar</p>
+      <h2 class="section-title">Fresh from the bar</h2>
+      <p class="section-lead">Our latest bakes, straight from Instagram. Follow along for daily sweetness.</p>
+      <a href="https://www.instagram.com/eddiescakerybar/" target="_blank" rel="noopener" class="btn btn--small insta__follow">Follow on Instagram</a>
+    </div>
+
+    <!-- Live feed mounts here when an embed URL is set in CONFIG.instagramFeed.embedUrl.
+         Otherwise the fallback grid below is shown. -->
+    <div class="insta__feed" id="instaFeed"></div>
+    <div class="insta__grid" id="instaFallback"><!-- fallback tiles injected by script.js --></div>
+  </section>
+
+  <!-- ============ CTA BANNER ============ -->
+  <section class="cta-banner">
+    <div class="cta-banner__inner reveal">
+      <h2>Ready to order something delicious?</h2>
+      <p>Your next celebration deserves a cake to remember.</p>
+      <a href="#order" class="btn btn--light">Start Your Order</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER / CONTACT ============ -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <div class="footer__col">
+        <a href="#home" class="nav__logo nav__logo--footer" aria-label="Eddie's Cakery Bar home">
+          <img src="images/logo-white.png" alt="Eddie's Cakery Bar" class="footer__logo-img" />
+        </a>
+        <p class="footer__tag">Handcrafted celebration cakes & treats, made to order with love.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="#" id="footWhatsApp">WhatsApp us</a></li>
+          <li><a href="#" id="footEmail">Email us</a></li>
+          <li><a href="https://www.instagram.com/eddiescakerybar/" target="_blank" rel="noopener">@eddiescakerybar</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Opening hours</h4>
+        <ul class="footer__hours">
+          <li><span>Mon – Fri</span><span>9am – 6pm</span></li>
+          <li><span>Saturday</span><span>10am – 4pm</span></li>
+          <li><span>Sunday</span><span>By order</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> Eddie's Cakery Bar. All rights reserved.</span>
+      <span>Baked with ♥</span>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING WHATSAPP ============ -->
+  <a href="#" class="float-wa" id="floatWa" aria-label="Chat on WhatsApp">✆</a>
+
+  <!-- ============ AI FAQ CHAT WIDGET ============ -->
+  <div class="chat" id="chat">
+    <button class="chat__toggle" id="chatToggle" aria-label="Chat with us">
+      <span class="chat__toggle-icon">✦</span>
+      <span class="chat__toggle-text">Ask us anything</span>
+    </button>
+
+    <div class="chat__window" id="chatWindow" aria-hidden="true">
+      <div class="chat__header">
+        <div>
+          <strong>Cakery Assistant</strong>
+          <span>Usually replies instantly</span>
+        </div>
+        <button class="chat__close" id="chatClose" aria-label="Close chat">×</button>
+      </div>
+      <div class="chat__body" id="chatBody">
+        <!-- messages injected -->
+      </div>
+      <div class="chat__quick" id="chatQuick">
+        <!-- quick reply chips injected -->
+      </div>
+      <form class="chat__input" id="chatForm">
+        <input type="text" id="chatText" placeholder="Type your question…" autocomplete="off" />
+        <button type="submit" aria-label="Send">→</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
