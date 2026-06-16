@@ -131,8 +131,8 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; line-height: 1.1; 
 }
 .nav__logo span { color: var(--gold-deep); font-style: italic; }
 .nav__logo { display: inline-flex; align-items: center; }
-.nav__logo-img { height: 46px; width: auto; display: block; }
-.footer__logo-img { height: 58px; width: auto; display: block; }
+.nav__logo-img { height: 44px; width: auto; display: block; }
+.footer__logo-img { height: 84px; width: auto; display: block; }
 .nav__links { display: flex; gap: 1.5rem; }
 .nav__links a {
   font-size: 0.78rem;
