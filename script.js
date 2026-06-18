@@ -16,7 +16,7 @@ const CONFIG = {
   // OPTIONAL: A Formspree form ID for real email delivery (free, text only).
   // 1) Sign up at https://formspree.io  2) Create a form  3) paste the ID here.
   // Leave as "" to fall back to opening the customer's own email app.
-  formspreeId: "",                    // e.g. "xmyzabcd"
+  formspreeId: "xqeovgve",            // Formspree form (handles enquiries + photo attachments)
 
   // RECOMMENDED for the "upload inspiration photos" feature (free + supports
   // photo attachments emailed to you):
@@ -376,29 +376,44 @@ orderForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Primary: Formspree — sends the enquiry AND attaches uploaded photos directly
-  // to your inbox (file attachments require a paid Formspree plan).
+  // Primary: Formspree — sends the enquiry to your inbox. If file uploads are
+  // enabled on your Formspree plan, attached photos are emailed too; if not, the
+  // enquiry still sends (text) and photos are handed off to WhatsApp.
   if (CONFIG.formspreeId) {
-    orderNote.textContent = files.length ? "Sending your enquiry and photos…" : "Sending your enquiry…";
-    try {
+    const endpoint = `https://formspree.io/f/${CONFIG.formspreeId}`;
+    const buildForm = (withFiles) => {
       const fd = new FormData();
       fd.append("_subject", `New cake enquiry from ${o.name}`);
       Object.entries(o).forEach(([k, v]) => v && fd.append(k, v));
-      [...files].forEach((f, i) => fd.append(`inspiration_photo_${i + 1}`, f));
-      const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
-        method: "POST",
-        headers: { Accept: "application/json" }, // let the browser set multipart boundary
-        body: fd,
-      });
+      if (withFiles) [...files].forEach((f, i) => fd.append(`inspiration_photo_${i + 1}`, f));
+      return fd;
+    };
+    const post = (fd) => fetch(endpoint, { method: "POST", headers: { Accept: "application/json" }, body: fd });
+    orderNote.textContent = files.length ? "Sending your enquiry and photos…" : "Sending your enquiry…";
+    try {
+      // First try with photos attached.
+      let res = await post(buildForm(files.length > 0));
       if (res.ok) {
         orderForm.reset();
         $("#uploadText").textContent = "Tap to add photos";
         orderNote.textContent = files.length
           ? "Thank you! Your enquiry and photos have been sent to our inbox. We'll be in touch soon. 🎂"
           : "Thank you! Your enquiry has been sent straight to our inbox. We'll be in touch soon. 🎂";
-      } else {
-        orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
+        return;
       }
+      // If it failed only because of the photos, resend the enquiry text-only
+      // and collect the photos via WhatsApp so nothing is lost.
+      if (files.length) {
+        res = await post(buildForm(false));
+        if (res.ok) {
+          orderForm.reset();
+          $("#uploadText").textContent = "Tap to add photos";
+          orderNote.textContent = "Enquiry sent to our inbox! Opening WhatsApp so you can attach your photos.";
+          window.open(waLink(orderToText(o) + "\n(Sending my inspiration photos here)"), "_blank");
+          return;
+        }
+      }
+      orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
     } catch {
       orderNote.textContent = "Network issue. Please try WhatsApp instead.";
     }
