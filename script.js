@@ -318,8 +318,8 @@ orderForm.addEventListener("submit", async (e) => {
   if (!validOrder(o)) return;
   const files = inspoInput.files;
 
-  // Preferred: Web3Forms — emails the order AND any uploaded photos to you.
-  if (CONFIG.web3formsKey) {
+  // Fallback service: Web3Forms (used only if Formspree isn't configured).
+  if (CONFIG.web3formsKey && !CONFIG.formspreeId) {
     orderNote.textContent = "Sending your enquiry…";
     try {
       // 1) If photos were added and ImgBB is configured, upload them first so we
@@ -376,21 +376,29 @@ orderForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Text-only email service (no attachments).
+  // Primary: Formspree — sends the enquiry AND attaches uploaded photos directly
+  // to your inbox (file attachments require a paid Formspree plan).
   if (CONFIG.formspreeId) {
-    orderNote.textContent = "Sending your order…";
+    orderNote.textContent = files.length ? "Sending your enquiry and photos…" : "Sending your enquiry…";
     try {
+      const fd = new FormData();
+      fd.append("_subject", `New cake enquiry from ${o.name}`);
+      Object.entries(o).forEach(([k, v]) => v && fd.append(k, v));
+      [...files].forEach((f, i) => fd.append(`inspiration_photo_${i + 1}`, f));
       const res = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
         method: "POST",
-        headers: { Accept: "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({ ...o, _subject: `New cake order from ${o.name}` }),
+        headers: { Accept: "application/json" }, // let the browser set multipart boundary
+        body: fd,
       });
-      orderNote.textContent = res.ok
-        ? (files.length
-            ? "Order emailed! 📸 Tip: please also send your photos via WhatsApp."
-            : "Thank you! Your order has been emailed to us. We'll be in touch soon. 🎂")
-        : "Hmm, that didn't send. Please try WhatsApp instead.";
-      if (res.ok) orderForm.reset();
+      if (res.ok) {
+        orderForm.reset();
+        $("#uploadText").textContent = "Tap to add photos";
+        orderNote.textContent = files.length
+          ? "Thank you! Your enquiry and photos have been sent to our inbox. We'll be in touch soon. 🎂"
+          : "Thank you! Your enquiry has been sent straight to our inbox. We'll be in touch soon. 🎂";
+      } else {
+        orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
+      }
     } catch {
       orderNote.textContent = "Network issue. Please try WhatsApp instead.";
     }
