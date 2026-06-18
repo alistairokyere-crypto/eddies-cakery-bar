@@ -31,7 +31,7 @@ const CONFIG = {
   //   1) Sign up free at https://imgbb.com  2) Go to https://api.imgbb.com and
   //   click "Get API key"  3) paste the 32-character key below.
   // Leave "" and photos are collected via WhatsApp instead.
-  imgbbKey: "",
+  imgbbKey: "6b4d4b5b74397f08f7cb7c2af61792b9",
 
   instagram: "eddiescakerybar",
 
@@ -376,44 +376,51 @@ orderForm.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Primary: Formspree — sends the enquiry to your inbox. If file uploads are
-  // enabled on your Formspree plan, attached photos are emailed too; if not, the
-  // enquiry still sends (text) and photos are handed off to WhatsApp.
+  // Primary: Formspree for the enquiry. Photos are hosted on ImgBB first and
+  // included as clickable links (works on Formspree's free plan, which doesn't
+  // accept file attachments). If hosting fails, photos fall back to WhatsApp.
   if (CONFIG.formspreeId) {
     const endpoint = `https://formspree.io/f/${CONFIG.formspreeId}`;
-    const buildForm = (withFiles) => {
+    const post = (fd) => fetch(endpoint, { method: "POST", headers: { Accept: "application/json" }, body: fd });
+    orderNote.textContent = files.length ? "Uploading your photos…" : "Sending your enquiry…";
+    try {
+      // 1) Host any photos on ImgBB to get shareable links.
+      let photoLinks = [];
+      if (files.length && CONFIG.imgbbKey) {
+        for (const f of files) {
+          try {
+            const ifd = new FormData();
+            ifd.append("image", f);
+            const ir = await fetch(`https://api.imgbb.com/1/upload?key=${CONFIG.imgbbKey}`, { method: "POST", body: ifd });
+            const ij = await ir.json();
+            if (ij && ij.success && ij.data && ij.data.url) photoLinks.push(ij.data.url);
+          } catch { /* skip a failed photo */ }
+        }
+      }
+
+      // 2) Send the enquiry (with photo links) to your inbox.
+      orderNote.textContent = "Sending your enquiry…";
       const fd = new FormData();
       fd.append("_subject", `New cake enquiry from ${o.name}`);
       Object.entries(o).forEach(([k, v]) => v && fd.append(k, v));
-      if (withFiles) [...files].forEach((f, i) => fd.append(`inspiration_photo_${i + 1}`, f));
-      return fd;
-    };
-    const post = (fd) => fetch(endpoint, { method: "POST", headers: { Accept: "application/json" }, body: fd });
-    orderNote.textContent = files.length ? "Sending your enquiry and photos…" : "Sending your enquiry…";
-    try {
-      // First try with photos attached.
-      let res = await post(buildForm(files.length > 0));
+      if (photoLinks.length) fd.append("inspiration_photos", photoLinks.join("\n"));
+      const res = await post(fd);
+
       if (res.ok) {
         orderForm.reset();
         $("#uploadText").textContent = "Tap to add photos";
-        orderNote.textContent = files.length
-          ? "Thank you! Your enquiry and photos have been sent to our inbox. We'll be in touch soon. 🎂"
-          : "Thank you! Your enquiry has been sent straight to our inbox. We'll be in touch soon. 🎂";
-        return;
-      }
-      // If it failed only because of the photos, resend the enquiry text-only
-      // and collect the photos via WhatsApp so nothing is lost.
-      if (files.length) {
-        res = await post(buildForm(false));
-        if (res.ok) {
-          orderForm.reset();
-          $("#uploadText").textContent = "Tap to add photos";
+        if (photoLinks.length) {
+          orderNote.textContent = "Thank you! Your enquiry and photos have been sent to our inbox. We'll be in touch soon. 🎂";
+        } else if (files.length) {
+          // photos couldn't be hosted -> hand off to WhatsApp so they aren't lost
           orderNote.textContent = "Enquiry sent to our inbox! Opening WhatsApp so you can attach your photos.";
           window.open(waLink(orderToText(o) + "\n(Sending my inspiration photos here)"), "_blank");
-          return;
+        } else {
+          orderNote.textContent = "Thank you! Your enquiry has been sent straight to our inbox. We'll be in touch soon. 🎂";
         }
+      } else {
+        orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
       }
-      orderNote.textContent = "Hmm, that didn't send. Please try WhatsApp instead.";
     } catch {
       orderNote.textContent = "Network issue. Please try WhatsApp instead.";
     }
