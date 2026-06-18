@@ -93,8 +93,8 @@ const CONFIG = {
 const CAKES = [
   {
     name: "Vintage Buttercream",
-    desc: "Hand-piped lambeth detail with bows and fresh seasonal fruit.",
-    img: "images/vintage-raspberry.jpg",
+    desc: "Hand-piped lambeth swags and scallops on elegant tiered cakes.",
+    img: "images/vintage-tiered.jpg",
   },
   {
     name: "Heart Cakes",
