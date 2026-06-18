@@ -117,9 +117,9 @@ const CAKES = [
     img: "images/racing.jpg",
   },
   {
-    name: "Themed Tiered Cakes",
-    desc: "Showstopping multi-tier cakes built around your theme.",
-    img: "images/circus-tj.jpg",
+    name: "Brand Collaborations",
+    desc: "Bespoke cupcakes and treats for brand events, launches and activations.",
+    img: "images/brand-collab.jpg",
   },
 ];
 
