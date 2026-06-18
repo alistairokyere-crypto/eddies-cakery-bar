@@ -92,8 +92,8 @@ const CONFIG = {
    /images folder and use e.g. "images/red-velvet.jpg".                  */
 const CAKES = [
   {
-    name: "Vintage Buttercream",
-    desc: "Hand-piped lambeth swags and scallops on elegant tiered cakes.",
+    name: "Wedding Cakes",
+    desc: "Timeless tiered wedding cakes with hand-piped lambeth swags and scallops.",
     img: "images/vintage-tiered.jpg",
   },
   {
