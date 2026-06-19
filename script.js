@@ -452,53 +452,53 @@ $("#bookClass").rel = "noopener";
    - Otherwise the curated SEED_REVIEWS are shown so the section
      never looks empty.
    ============================================================ */
-const { placeId, featurableWidgetId } = CONFIG.google;
+// Runs only if the Reviews section is present (it's currently removed until the
+// business is connected to real Google reviews — restore the HTML to re-enable).
+if (document.getElementById("reviews")) {
+  const { placeId, featurableWidgetId } = CONFIG.google;
 
-// --- wire up the Google buttons ---
-const leaveBtn = $("#leaveGoogleReview");
-const seeAllBtn = $("#seeAllGoogle");
-if (placeId) {
-  leaveBtn.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
-  seeAllBtn.href = `https://search.google.com/local/reviews?placeid=${placeId}`;
-} else {
-  // no Place ID yet → send people to find the business on Google Maps
-  const q = encodeURIComponent(CONFIG.businessName);
-  leaveBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
-  seeAllBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
-}
+  // --- wire up the Google buttons ---
+  const leaveBtn = $("#leaveGoogleReview");
+  const seeAllBtn = $("#seeAllGoogle");
+  if (placeId) {
+    leaveBtn.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
+    seeAllBtn.href = `https://search.google.com/local/reviews?placeid=${placeId}`;
+  } else {
+    const q = encodeURIComponent(CONFIG.businessName);
+    leaveBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+    seeAllBtn.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+  }
 
-function starStr(n) { return "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n); }
+  const starStr = (n) => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
+  const reviewsGrid = $("#reviewsGrid");
+  const renderCurated = () => {
+    reviewsGrid.innerHTML = "";
+    SEED_REVIEWS.forEach((r) => {
+      const card = document.createElement("article");
+      card.className = "review-card reveal in";
+      card.innerHTML = `
+        <div class="review-card__stars">${starStr(r.rating)}</div>
+        <p class="review-card__text">“${r.text}”</p>
+        <p class="review-card__author">${r.name} · <span class="review-card__src">Google</span></p>`;
+      reviewsGrid.appendChild(card);
+    });
+    const avg = SEED_REVIEWS.reduce((s, r) => s + r.rating, 0) / SEED_REVIEWS.length;
+    $("#avgStars").textContent = starStr(Math.round(avg));
+    $("#avgText").textContent = `${avg.toFixed(1)} · from ${SEED_REVIEWS.length} reviews`;
+  };
 
-// --- curated fallback reviews ---
-const reviewsGrid = $("#reviewsGrid");
-function renderCurated() {
-  reviewsGrid.innerHTML = "";
-  SEED_REVIEWS.forEach((r) => {
-    const card = document.createElement("article");
-    card.className = "review-card reveal in";
-    card.innerHTML = `
-      <div class="review-card__stars">${starStr(r.rating)}</div>
-      <p class="review-card__text">“${r.text}”</p>
-      <p class="review-card__author">${r.name} · <span class="review-card__src">Google</span></p>`;
-    reviewsGrid.appendChild(card);
-  });
-  const avg = SEED_REVIEWS.reduce((s, r) => s + r.rating, 0) / SEED_REVIEWS.length;
-  $("#avgStars").textContent = starStr(Math.round(avg));
-  $("#avgText").textContent = `${avg.toFixed(1)} · from ${SEED_REVIEWS.length} reviews`;
-}
-
-// --- mount live Google reviews (Featurable) or fall back to curated ---
-if (featurableWidgetId) {
-  reviewsGrid.style.display = "none";
-  const mount = $("#googleReviews");
-  mount.innerHTML = `<div id="featurable-${featurableWidgetId}" data-featurable-async></div>`;
-  const s = document.createElement("script");
-  s.src = "https://featurable.com/assets/bundle.js";
-  s.async = true;
-  s.charset = "utf-8";
-  document.body.appendChild(s);
-} else {
-  renderCurated();
+  // --- mount live Google reviews (Featurable) or fall back to curated ---
+  if (featurableWidgetId) {
+    reviewsGrid.style.display = "none";
+    $("#googleReviews").innerHTML = `<div id="featurable-${featurableWidgetId}" data-featurable-async></div>`;
+    const s = document.createElement("script");
+    s.src = "https://featurable.com/assets/bundle.js";
+    s.async = true;
+    s.charset = "utf-8";
+    document.body.appendChild(s);
+  } else {
+    renderCurated();
+  }
 }
 
 /* ============================================================
