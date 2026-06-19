@@ -93,32 +93,32 @@ const CONFIG = {
 const CAKES = [
   {
     name: "Wedding Cakes",
-    desc: "Timeless tiered wedding cakes with hand-piped lambeth swags and scallops.",
+    desc: "Bespoke luxury wedding cakes designed to beautifully complement your special day.",
     img: "images/vintage-tiered.jpg",
   },
   {
-    name: "Heart Cakes",
-    desc: "On-trend heart shapes with vintage piping, tassels and ribbon.",
+    name: "Vintage Cakes",
+    desc: "Stylish vintage cakes perfect for birthdays, anniversaries and memorable celebrations.",
     img: "images/heart-thirty.jpg",
   },
   {
-    name: "Ruffle Cakes",
-    desc: "Delicate textured ruffles finished with fresh florals.",
+    name: "Wafer Paper Cakes",
+    desc: "Elegant cakes featuring delicate edible wafer paper details for a modern, artistic finish.",
     img: "images/chapter30.jpg",
   },
   {
-    name: "Fruit & Celebration",
-    desc: "Statement cakes piled with fresh fruit and gold detailing.",
-    img: "images/raspberry-square.jpg",
+    name: "Tiered Cakes",
+    desc: "Beautifully crafted multi-tier cakes designed to create a stunning centrepiece for any celebration.",
+    img: "images/circus-tj.jpg",
   },
   {
-    name: "Kids' Birthday Cakes",
-    desc: "Fun, characterful designs for the little one's big day.",
+    name: "Kids Cakes",
+    desc: "Fun and creative themed cakes designed to make every child's celebration extra special.",
     img: "images/racing.jpg",
   },
   {
     name: "Brand Collaborations",
-    desc: "Bespoke cupcakes and treats for brand events, launches and activations.",
+    desc: "Custom-designed cakes created to elevate brand events, launches and corporate celebrations.",
     img: "images/brand-collab.jpg",
   },
 ];
