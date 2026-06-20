@@ -172,9 +172,12 @@ $("#sendInstagram").href = igLink;
    Nav: scroll state + mobile burger
    ============================================================ */
 const nav = $("#nav");
+const toTop = $("#toTop");
 window.addEventListener("scroll", () => {
   nav.classList.toggle("scrolled", window.scrollY > 30);
+  toTop.classList.toggle("show", window.scrollY > 600);
 });
+toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 const navLinks = $("#navLinks");
 $("#burger").addEventListener("click", () => navLinks.classList.toggle("open"));
 navLinks.querySelectorAll("a").forEach((a) =>
