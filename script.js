@@ -275,6 +275,12 @@ function validOrder(o) {
     orderForm.reportValidity();
     return false;
   }
+  const agree = $("#agree");
+  if (agree && !agree.checked) {
+    orderNote.textContent = "Please read and agree to the Policies & Terms before sending.";
+    agree.reportValidity();
+    return false;
+  }
   return true;
 }
 
